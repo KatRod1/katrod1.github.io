@@ -46,6 +46,25 @@ function loadPreviewVideo(row) {
   }, 600);
 }
 
+// Inject inline thumbnail into each project row (visible on mobile)
+document.querySelectorAll('.project').forEach((row) => {
+  if (row.querySelector('.project-thumb')) return;
+  const youtube = row.dataset.youtube;
+  const thumb = youtube
+    ? `https://i.ytimg.com/vi/${youtube}/hqdefault.jpg`
+    : row.dataset.thumb;
+  if (!thumb) return;
+  const wrap = document.createElement('div');
+  wrap.className = 'project-thumb';
+  const img = document.createElement('img');
+  img.src = thumb;
+  img.alt = row.dataset.title || '';
+  img.loading = 'lazy';
+  img.decoding = 'async';
+  wrap.appendChild(img);
+  row.insertBefore(wrap, row.firstChild);
+});
+
 document.querySelectorAll('.project').forEach((row) => {
   row.addEventListener('mouseenter', () => {
     if (!preview) return;
@@ -55,11 +74,6 @@ document.querySelectorAll('.project').forEach((row) => {
     if (previewThumb && thumb) previewThumb.src = thumb;
     if (previewTitle && title) previewTitle.textContent = title;
     if (previewYear && year) previewYear.textContent = year;
-    const metaList = row.querySelector('.project-meta');
-    if (previewRatio && metaList) {
-      const last = metaList.lastElementChild?.textContent;
-      if (last) previewRatio.textContent = last;
-    }
     preview.style.left = mouseX + 'px';
     preview.style.top = mouseY + 'px';
     preview.classList.add('active');
