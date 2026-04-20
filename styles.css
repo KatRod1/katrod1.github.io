@@ -445,8 +445,8 @@ footer {
 }
 .footer-mark .dot { color: var(--accent); }
 .footer-col h4 { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 0.85rem; color: var(--ink-soft); }
-.footer-col a { display: block; padding: 0.18rem 0; transition: color 0.2s, padding 0.2s; }
-.footer-col a:hover { color: var(--accent); padding-left: 0.35rem; }
+.footer-col a { display: block; padding: 0.18rem 0; transition: color 0.2s, transform 0.2s; }
+.footer-col a:hover { color: var(--accent); transform: translateX(0.35rem); }
 .footer-meta {
   padding-top: 1.75rem; margin-top: 4rem;
   border-top: 1px solid var(--rule-soft);
